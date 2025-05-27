@@ -4,7 +4,7 @@
 
 PinPoint is a modern, responsive web application that allows users to create, organize, and manage location pins on an interactive map. Built with React and Firebase, it offers a the user the option to catalog their favorite places with custom categories, ratings, and personal notes.
 
-![PinPoint Screenshot](https://via.placeholder.com/800x400/2563eb/ffffff?text=PinPoint+Screenshot)
+![PinPoint Screenshot](/public/images/project-screenshot.png)
 
 ## ✨ Features
 
@@ -40,7 +40,7 @@ PinPoint is a modern, responsive web application that allows users to create, or
 
 ## 🚀 Live Demo
 
-[**View Live Demo**](https://demo-link.com)
+[**View Live Demo**](https://serene-florentine-4eaae2.netlify.app/)
 
 ## 🛠️ Built With
 
