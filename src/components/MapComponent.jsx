@@ -266,61 +266,62 @@ const MapComponent = () => {
   return (
     <div className={styles.mapPage}>
       {/* Header Controls */}
-      <div className={`${styles.mapHeader} glass-effect`}>
-        <div className={styles.headerLeft}>
-          <h1 className={styles.pageTitle}>My Map</h1>
-          <div className={styles.mapStats}>
-            <span className={styles.statItem}>
-              {markers.length} {markers.length === 1 ? 'place' : 'places'}
-            </span>
-            <span className={styles.statItem}>
-              {new Set(markers.map(m => m.category)).size} categories
-            </span>
-          </div>
-        </div>
-        
-        <div className={styles.headerControls}>
-          <SearchBar 
-            onSearch={handleLocationSearch}
-            onCurrentLocation={handleGetCurrentLocation}
-            searchQuery={searchQuery}
-            onSearchQueryChange={setSearchQuery}
-          />
-          
-          <CategorySelector
-            selectedCategory={selectedCategory}
-            onCategoryChange={setSelectedCategory}
-            categoryFilter={categoryFilter}
-            onCategoryFilterChange={setCategoryFilter}
-          />
-          
-          <button
-            onClick={toggleAddPinMode}
-            className={`btn ${isAddingPin ? 'btn-primary' : 'btn-secondary'} ${styles.addPinButton}`}
-            aria-pressed={isAddingPin}
-          >
-            {isAddingPin ? (
-              <>
-                <span>Cancel</span>
-                <span className={styles.addPinHint}>Click map to cancel</span>
-              </>
-            ) : (
-              <>
-                <PlusIcon />
-                <span>Add Pin</span>
-              </>
-            )}
-          </button>
-          
-          <button
-            onClick={() => setShowStats(!showStats)}
-            className={`btn btn-ghost ${styles.statsButton}`}
-            aria-pressed={showStats}
-          >
-            <StatsIcon />
-          </button>
-        </div>
+<div className={`${styles.mapHeader} glass-effect`}>
+  <div className={styles.headerTop}>
+    <div className={styles.headerLeft}>
+      <h1 className={styles.pageTitle}>My Map</h1>
+      <div className={styles.mapStats}>
+        <span className={styles.statItem}>
+          {markers.length} {markers.length === 1 ? 'place' : 'places'}
+        </span>
+        <span className={styles.statItem}>
+          {new Set(markers.map(m => m.category)).size} categories
+        </span>
       </div>
+    </div>
+    
+    <button
+      onClick={() => setShowStats(!showStats)}
+      className={`btn btn-ghost ${styles.statsButton}`}
+      aria-pressed={showStats}
+      title="View Statistics"
+    >
+      <StatsIcon />
+    </button>
+  </div>
+  <div className={styles.headerControls}>
+    <SearchBar 
+      onSearch={handleLocationSearch}
+      onCurrentLocation={handleGetCurrentLocation}
+      searchQuery={searchQuery}
+      onSearchQueryChange={setSearchQuery}
+    />
+    
+    <CategorySelector
+      selectedCategory={selectedCategory}
+      onCategoryChange={setSelectedCategory}
+      categoryFilter={categoryFilter}
+      onCategoryFilterChange={setCategoryFilter}
+    />
+    
+    <button
+      onClick={toggleAddPinMode}
+      className={`btn ${isAddingPin ? 'btn-primary' : 'btn-secondary'} ${styles.addPinButton}`}
+      aria-pressed={isAddingPin}
+    >
+      {isAddingPin ? (
+        <>
+          <span>Cancel</span>
+        </>
+      ) : (
+        <>
+          <PlusIcon />
+          <span>Add Pin</span>
+        </>
+      )}
+    </button>
+  </div>
+</div>
 
       {/* Map Container */}
       <div className={styles.mapWrapper}>

@@ -56,6 +56,15 @@ const LogoutIcon = () => (
   </svg>
 );
 
+const CrosshairIcon = () => (
+  <svg width="24" height="24" viewBox="0 0 32 32" fill="none">
+    <circle cx="16" cy="16" r="10" fill="none" stroke="currentColor" strokeWidth="2"/>
+    <line x1="16" y1="8" x2="16" y2="24" stroke="currentColor" strokeWidth="2"/>
+    <line x1="8" y1="16" x2="24" y2="16" stroke="currentColor" strokeWidth="2"/>
+    <circle cx="16" cy="16" r="3" fill="currentColor"/>
+  </svg>
+);
+
 const Navbar = ({ user }) => {
   const { isDark, toggleTheme } = useTheme();
   const location = useLocation();
@@ -105,7 +114,7 @@ const Navbar = ({ user }) => {
       <div className={`${styles.navContainer} container`}>
         {/* Logo */}
         <Link to="/" className={styles.brand}>
-          <MapIcon />
+          <CrosshairIcon />
           <span>MapMarker</span>
         </Link>
 
