@@ -428,16 +428,23 @@ const MapComponent = () => {
         </MapContainer>
 
         {isAddingPin && (
-          <div className={styles.addPinOverlay}>
-            <div className={styles.addPinInstructions}>
-              <div className={styles.instructionIcon}>
-                <MapPinIcon />
-              </div>
-              <h3>Click anywhere on the map to add a pin</h3>
-              <p>Selected category: <strong>{selectedCategory}</strong></p>
-            </div>
-          </div>
-        )}
+  <div className={styles.addPinOverlay}>
+    <div className={styles.addPinInstructions}>
+      <div className={styles.instructionIcon}>
+        <MapPinIcon />
+      </div>
+      <h3>Click anywhere on the map to add a pin</h3>
+      <p>Selected category: <strong>{selectedCategory}</strong></p>
+      <button 
+        onClick={() => setIsAddingPin(false)}
+        className="btn btn-secondary btn-sm"
+        style={{ marginTop: '1rem' }}
+      >
+        Cancel
+      </button>
+    </div>
+  </div>
+)}
       </div>
 
       {showStats && (

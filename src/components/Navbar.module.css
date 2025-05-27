@@ -1,7 +1,7 @@
 .navbar {
   position: sticky;
   top: 0;
-  z-index: var(--z-sticky);
+  z-index: 99998;
   padding: var(--space-md) 0;
   border-bottom: 1px solid var(--border-color);
   transition: all var(--transition-normal);
@@ -136,7 +136,9 @@
   border-top: 1px solid var(--border-color);
   border-bottom: 1px solid var(--border-color);
   animation: slideDown 0.2s ease-out;
-  z-index: var(--z-dropdown);
+  z-index: 99999;
+  background: var(--bg-card);
+  box-shadow: var(--shadow-xl);
 }
 
 @keyframes slideDown {
@@ -225,6 +227,13 @@
 }
 
 /* Responsive Design */
+
+@media (max-width: 1024px) {
+  .userEmail {
+    display: none;
+  }
+}
+
 @media (max-width: 768px) {
   .desktopNav {
     display: none;
@@ -232,6 +241,8 @@
   
   .mobileMenuButton {
     display: flex;
+    align-items: center;
+    justify-content: center;
   }
   
   .navContainer {
@@ -240,12 +251,6 @@
   
   .navbar {
     padding: var(--space-sm) 0;
-  }
-}
-
-@media (max-width: 1024px) {
-  .userEmail {
-    display: none;
   }
 }
 

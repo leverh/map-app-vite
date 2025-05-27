@@ -1,11 +1,10 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { signOut } from 'firebase/auth';
 import { auth } from '../firebaseConfig';
 import { useTheme } from '../App';
 import styles from './Navbar.module.css';
 
-// Icons
 const MapIcon = () => (
   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M9 20L3 17V4L9 7L15 4L21 7V20L15 17L9 20Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -62,6 +61,26 @@ const Navbar = ({ user }) => {
   const location = useLocation();
   const navigate = useNavigate();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Check for mobile size
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    checkScreenSize();
+
+    window.addEventListener('resize', checkScreenSize);
+    
+    return () => window.removeEventListener('resize', checkScreenSize);
+  }, []);
+
+  useEffect(() => {
+    if (!isMobile && isMobileMenuOpen) {
+      setIsMobileMenuOpen(false);
+    }
+  }, [isMobile, isMobileMenuOpen]);
 
   const handleSignOut = async () => {
     try {
@@ -91,73 +110,77 @@ const Navbar = ({ user }) => {
         </Link>
 
         {/* Desktop Navigation */}
-        <div className={styles.desktopNav}>
-          {user && (
-            <div className={styles.navLinks}>
-              <Link 
-                to="/map" 
-                className={`${styles.navLink} ${isActivePage('/map') ? styles.active : ''}`}
-              >
-                <MapIcon />
-                <span>Map</span>
-              </Link>
-              <Link 
-                to="/profile" 
-                className={`${styles.navLink} ${isActivePage('/profile') ? styles.active : ''}`}
-              >
-                <UserIcon />
-                <span>Profile</span>
-              </Link>
-            </div>
-          )}
-
-          <div className={styles.navActions}>
-            {/* Theme Toggle */}
-            <button 
-              onClick={toggleTheme}
-              className={`${styles.themeToggle} btn btn-ghost btn-sm`}
-              aria-label={`Switch to ${isDark ? 'light' : 'dark'} theme`}
-            >
-              {isDark ? <SunIcon /> : <MoonIcon />}
-            </button>
-
-            {/* Auth Actions */}
-            {user ? (
-              <div className={styles.userActions}>
-                <span className={styles.userEmail}>{user.email}</span>
-                <button 
-                  onClick={handleSignOut}
-                  className="btn btn-ghost btn-sm"
+        {!isMobile && (
+          <div className={styles.desktopNav}>
+            {user && (
+              <div className={styles.navLinks}>
+                <Link 
+                  to="/map" 
+                  className={`${styles.navLink} ${isActivePage('/map') ? styles.active : ''}`}
                 >
-                  <LogoutIcon />
-                  <span>Sign Out</span>
-                </button>
-              </div>
-            ) : (
-              <div className={styles.authLinks}>
-                <Link to="/signin" className="btn btn-ghost btn-sm">
-                  Sign In
+                  <MapIcon />
+                  <span>Map</span>
                 </Link>
-                <Link to="/signup" className="btn btn-primary btn-sm">
-                  Sign Up
+                <Link 
+                  to="/profile" 
+                  className={`${styles.navLink} ${isActivePage('/profile') ? styles.active : ''}`}
+                >
+                  <UserIcon />
+                  <span>Profile</span>
                 </Link>
               </div>
             )}
+
+            <div className={styles.navActions}>
+              {/* Theme Toggle */}
+              <button 
+                onClick={toggleTheme}
+                className={`${styles.themeToggle} btn btn-ghost btn-sm`}
+                aria-label={`Switch to ${isDark ? 'light' : 'dark'} theme`}
+              >
+                {isDark ? <SunIcon /> : <MoonIcon />}
+              </button>
+
+              {/* Auth Actions */}
+              {user ? (
+                <div className={styles.userActions}>
+                  <span className={styles.userEmail}>{user.email}</span>
+                  <button 
+                    onClick={handleSignOut}
+                    className="btn btn-ghost btn-sm"
+                  >
+                    <LogoutIcon />
+                    <span>Sign Out</span>
+                  </button>
+                </div>
+              ) : (
+                <div className={styles.authLinks}>
+                  <Link to="/signin" className="btn btn-ghost btn-sm">
+                    Sign In
+                  </Link>
+                  <Link to="/signup" className="btn btn-primary btn-sm">
+                    Sign Up
+                  </Link>
+                </div>
+              )}
+            </div>
           </div>
-        </div>
+        )}
 
         {/* Mobile Menu Button */}
-        <button 
-          onClick={toggleMobileMenu}
-          className={`${styles.mobileMenuButton} btn btn-ghost btn-sm`}
-          aria-label="Toggle mobile menu"
-        >
-          {isMobileMenuOpen ? <CloseIcon /> : <MenuIcon />}
-        </button>
+        {isMobile && (
+          <button 
+            onClick={toggleMobileMenu}
+            className={`${styles.mobileMenuButton} btn btn-ghost btn-sm`}
+            aria-label="Toggle mobile menu"
+          >
+            {isMobileMenuOpen ? <CloseIcon /> : <MenuIcon />}
+          </button>
+        )}
       </div>
 
       {/* Mobile Menu */}
-      {isMobileMenuOpen && (
+      {isMobile && isMobileMenuOpen && (
         <div className={`${styles.mobileMenu} glass-effect`}>
           <div className={styles.mobileMenuContent}>
             {user && (
