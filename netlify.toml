@@ -1,6 +1,7 @@
 [build]
   command = "npm install --legacy-peer-deps && npm run build"
   publish = "dist"
+  environment = { NODE_ENV = "production" }
 
 [[redirects]]
   from = "/*"
