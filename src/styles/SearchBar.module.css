@@ -1,0 +1,303 @@
+.searchContainer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.searchBar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: var(--space-xs);
+  transition: all var(--transition-fast);
+  min-width: 300px;
+}
+
+.searchBar:focus-within {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.inputWrapper {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  flex: 1;
+  padding: var(--space-xs) var(--space-sm);
+}
+
+.inputWrapper svg {
+  color: var(--text-tertiary);
+  flex-shrink: 0;
+}
+
+.searchInput {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: var(--font-size-sm);
+  color: var(--text-primary);
+  font-family: inherit;
+}
+
+.searchInput::placeholder {
+  color: var(--text-tertiary);
+}
+
+.searchInput:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.clearButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-sm);
+  color: var(--text-tertiary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  padding: 0;
+}
+
+.clearButton:hover {
+  color: var(--text-secondary);
+  background: var(--bg-secondary);
+}
+
+.actionButtons {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.searchButton {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: var(--space-xs) var(--space-md);
+  min-width: 70px;
+  justify-content: center;
+}
+
+.searchButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.locationButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border-radius: var(--radius-sm);
+}
+
+.spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid transparent;
+  border-top: 2px solid currentColor;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Suggestions Dropdown */
+.suggestions {
+  position: absolute;
+  top: calc(100% + var(--space-xs));
+  left: 0;
+  right: 0;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-xl);
+  z-index: var(--z-dropdown);
+  animation: slideDown 0.2s ease-out;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.suggestionItem {
+  display: block;
+  width: 100%;
+  padding: var(--space-md);
+  background: transparent;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.suggestionItem:last-child {
+  border-bottom: none;
+}
+
+.suggestionItem:hover,
+.suggestionSelected {
+  background: var(--bg-secondary);
+}
+
+.suggestionSelected {
+  background: rgba(37, 99, 235, 0.1);
+}
+
+.suggestionContent {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.suggestionName {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-primary);
+}
+
+.suggestionDetails {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.suggestionCountry {
+  font-size: var(--font-size-xs);
+  color: var(--text-secondary);
+}
+
+.suggestionType {
+  font-size: var(--font-size-xs);
+  color: var(--text-tertiary);
+  background: var(--bg-tertiary);
+  padding: 2px var(--space-xs);
+  border-radius: var(--radius-sm);
+  text-transform: capitalize;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .searchBar {
+    min-width: 250px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-xs);
+  }
+  
+  .inputWrapper {
+    order: 1;
+  }
+  
+  .actionButtons {
+    order: 2;
+    justify-content: space-between;
+  }
+  
+  .searchButton {
+    flex: 1;
+  }
+}
+
+@media (max-width: 480px) {
+  .searchBar {
+    min-width: 200px;
+  }
+  
+  .searchButton {
+    min-width: 60px;
+    font-size: var(--font-size-xs);
+    padding: var(--space-xs);
+  }
+  
+  .locationButton {
+    width: 28px;
+    height: 28px;
+  }
+  
+  .suggestionItem {
+    padding: var(--space-sm);
+  }
+}
+
+/* Scrollbar */
+.suggestions::-webkit-scrollbar {
+  width: 6px;
+}
+
+.suggestions::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+  border-radius: 3px;
+}
+
+.suggestions::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 3px;
+}
+
+.suggestions::-webkit-scrollbar-thumb:hover {
+  background: var(--border-dark);
+}
+
+/* Focus */
+.searchInput:focus,
+.clearButton:focus,
+.searchButton:focus,
+.locationButton:focus,
+.suggestionItem:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+  .searchBar:focus-within {
+    border-width: 2px;
+  }
+  
+  .suggestionSelected {
+    border: 2px solid var(--color-primary);
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .suggestions {
+    animation: none;
+  }
+  
+  .spinner {
+    animation: none;
+  }
+  
+  .searchBar,
+  .clearButton,
+  .suggestionItem {
+    transition: none;
+  }
+}

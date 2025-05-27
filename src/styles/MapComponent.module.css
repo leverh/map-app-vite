@@ -1,0 +1,554 @@
+.mapPage {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-primary);
+  overflow: hidden;
+}
+
+/* Header */
+.mapHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-lg) var(--space-xl);
+  border-bottom: 1px solid var(--border-color);
+  background: var(--bg-card);
+  backdrop-filter: blur(10px);
+  z-index: var(--z-sticky);
+  flex-shrink: 0;
+}
+
+.headerLeft {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.pageTitle {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.mapStats {
+  display: flex;
+  gap: var(--space-lg);
+}
+
+.statItem {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  font-weight: var(--font-weight-medium);
+}
+
+.headerControls {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.addPinButton {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-xs);
+  min-width: 80px;
+  transition: all var(--transition-normal);
+}
+
+.addPinButton[aria-pressed="true"] {
+  background-color: var(--color-primary);
+  color: white;
+  transform: scale(0.95);
+}
+
+.addPinHint {
+  font-size: var(--font-size-xs);
+  opacity: 0.8;
+}
+
+.statsButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+}
+
+/* Map Container */
+.mapWrapper {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+.map {
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+/* Custom Leaflet Overrides */
+:global(.leaflet-container) {
+  background: var(--bg-secondary);
+  font-family: var(--font-family-base);
+}
+
+:global(.leaflet-popup-content-wrapper) {
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-xl);
+  border: 1px solid var(--border-color);
+}
+
+:global(.leaflet-popup-tip) {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-top: none;
+  border-right: none;
+}
+
+:global(.leaflet-popup-content) {
+  margin: 0;
+  padding: 0;
+}
+
+/* Custom Popup */
+.customPopup {
+  margin: 0;
+}
+
+.popupContent {
+  padding: var(--space-lg);
+  min-width: 250px;
+}
+
+.popupHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-md);
+  margin-bottom: var(--space-md);
+}
+
+.popupTitle {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+  margin: 0;
+  flex: 1;
+}
+
+.popupCategory {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-primary);
+  background: rgba(37, 99, 235, 0.1);
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-full);
+  text-transform: capitalize;
+  white-space: nowrap;
+}
+
+.popupComment {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  line-height: var(--line-height-relaxed);
+  margin: 0 0 var(--space-md) 0;
+}
+
+.popupRating {
+  display: flex;
+  gap: var(--space-xs);
+  margin-bottom: var(--space-md);
+}
+
+.starFilled {
+  color: #fbbf24;
+}
+
+.starEmpty {
+  color: var(--border-color);
+}
+
+.popupActions {
+  display: flex;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-md);
+}
+
+.removeButton {
+  color: var(--color-error);
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.removeButton:hover {
+  background-color: rgba(239, 68, 68, 0.1);
+}
+
+.popupMeta {
+  font-size: var(--font-size-xs);
+  color: var(--text-tertiary);
+  padding-top: var(--space-sm);
+  border-top: 1px solid var(--border-light);
+  text-align: center;
+}
+
+/* Custom Map Controls */
+.mapControls {
+  position: absolute;
+  bottom: var(--space-xl);
+  right: var(--space-xl);
+  z-index: var(--z-fixed);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.controlButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  box-shadow: var(--shadow-md);
+}
+
+.controlButton:hover {
+  background: var(--bg-secondary);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Add Pin Overlay */
+.addPinOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: var(--z-modal);
+  backdrop-filter: blur(2px);
+  animation: fadeIn 0.3s ease-out;
+}
+
+.addPinInstructions {
+  background: var(--bg-card);
+  padding: var(--space-2xl);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-xl);
+  text-align: center;
+  max-width: 400px;
+  margin: var(--space-xl);
+  border: 1px solid var(--border-color);
+  animation: slideUp 0.3s ease-out;
+}
+
+.instructionIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-light));
+  border-radius: var(--radius-full);
+  margin: 0 auto var(--space-lg);
+  color: white;
+  animation: pulse 2s infinite;
+}
+
+.addPinInstructions h3 {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+  margin: 0 0 var(--space-md) 0;
+}
+
+.addPinInstructions p {
+  font-size: var(--font-size-base);
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* Marker Clustering */
+:global(.marker-cluster-custom) {
+  background: transparent;
+}
+
+:global(.marker-cluster) {
+  border-radius: 50%;
+  text-align: center;
+  color: white;
+  font-weight: 600;
+  border: 2px solid rgba(255,255,255,0.5);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+:global(.marker-cluster div) {
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+:global(.marker-cluster-small) {
+  background-color: rgba(37, 99, 235, 0.8);
+  width: 30px;
+  height: 30px;
+}
+
+:global(.marker-cluster-small div) {
+  width: 26px;
+  height: 26px;
+  font-size: 11px;
+}
+
+:global(.marker-cluster-medium) {
+  background-color: rgba(37, 99, 235, 0.9);
+  width: 40px;
+  height: 40px;
+}
+
+:global(.marker-cluster-medium div) {
+  width: 36px;
+  height: 36px;
+  font-size: 13px;
+}
+
+:global(.marker-cluster-large) {
+  background-color: var(--color-primary);
+  width: 50px;
+  height: 50px;
+}
+
+:global(.marker-cluster-large div) {
+  width: 46px;
+  height: 46px;
+  font-size: 15px;
+}
+
+/* Custom Marker */
+:global(.custom-div-icon) {
+  background: transparent;
+  border: none;
+}
+
+:global(.custom-marker) {
+  transition: all 0.2s ease;
+}
+
+:global(.custom-marker:hover) {
+  transform: scale(1.1);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { 
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to { 
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .mapHeader {
+    padding: var(--space-md);
+  }
+  
+  .headerControls {
+    gap: var(--space-sm);
+  }
+  
+  .addPinButton {
+    min-width: 60px;
+    font-size: var(--font-size-sm);
+  }
+  
+  .addPinHint {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .mapHeader {
+    flex-direction: column;
+    gap: var(--space-md);
+    align-items: stretch;
+  }
+  
+  .headerLeft {
+    align-items: center;
+    text-align: center;
+  }
+  
+  .headerControls {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .mapStats {
+    justify-content: center;
+  }
+  
+  .mapControls {
+    bottom: var(--space-lg);
+    right: var(--space-lg);
+  }
+  
+  .controlButton {
+    width: 44px;
+    height: 44px;
+  }
+  
+  .addPinInstructions {
+    margin: var(--space-md);
+    padding: var(--space-xl);
+  }
+  
+  .popupContent {
+    min-width: 200px;
+    padding: var(--space-md);
+  }
+}
+
+@media (max-width: 480px) {
+  .mapHeader {
+    padding: var(--space-sm);
+  }
+  
+  .pageTitle {
+    font-size: var(--font-size-xl);
+  }
+  
+  .headerControls {
+    gap: var(--space-xs);
+  }
+  
+  .addPinButton {
+    min-width: 50px;
+    padding: var(--space-xs) var(--space-sm);
+  }
+  
+  .statsButton {
+    width: 36px;
+    height: 36px;
+  }
+  
+  .mapControls {
+    bottom: var(--space-md);
+    right: var(--space-md);
+  }
+  
+  .controlButton {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .addPinInstructions h3 {
+    font-size: var(--font-size-lg);
+  }
+  
+  .instructionIcon {
+    width: 48px;
+    height: 48px;
+  }
+}
+
+/* Dark Theme Specific */
+[data-theme="dark"] .mapControls .controlButton {
+  background: rgba(30, 41, 59, 0.9);
+  border-color: var(--border-color);
+}
+
+[data-theme="dark"] .mapControls .controlButton:hover {
+  background: rgba(51, 65, 85, 0.9);
+}
+
+[data-theme="dark"] :global(.marker-cluster-small),
+[data-theme="dark"] :global(.marker-cluster-medium),
+[data-theme="dark"] :global(.marker-cluster-large) {
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* High Performance Styles */
+.map * {
+  will-change: transform;
+}
+
+/* Focus Styles for Accessibility */
+.controlButton:focus,
+.addPinButton:focus,
+.statsButton:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.removeButton:focus {
+  outline: 2px solid var(--color-error);
+  outline-offset: 2px;
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  .addPinOverlay,
+  .addPinInstructions,
+  .instructionIcon,
+  .controlButton,
+  :global(.custom-marker) {
+    animation: none;
+    transition: none;
+  }
+  
+  .controlButton:hover {
+    transform: none;
+  }
+  
+  :global(.custom-marker:hover) {
+    transform: none;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .mapHeader,
+  .mapControls,
+  .addPinOverlay {
+    display: none;
+  }
+  
+  .mapWrapper {
+    height: 100vh;
+  }
+}

@@ -1,0 +1,380 @@
+.profilePage {
+  min-height: 100vh;
+  padding: var(--space-2xl) 0;
+  background: var(--bg-primary);
+}
+
+.profileContainer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xl);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Profile Header */
+.profileHeader {
+  padding: var(--space-2xl);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-xl);
+}
+
+.avatarSection {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xl);
+  flex: 1;
+}
+
+.avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: var(--radius-full);
+  border: 3px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-secondary);
+  color: var(--text-tertiary);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.avatarImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.userInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.userName {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+  margin: 0 0 var(--space-xs) 0;
+}
+
+.userEmail {
+  font-size: var(--font-size-base);
+  color: var(--text-secondary);
+  margin: 0 0 var(--space-xs) 0;
+  word-break: break-word;
+}
+
+.joinDate {
+  font-size: var(--font-size-sm);
+  color: var(--text-tertiary);
+  margin: 0;
+}
+
+.headerActions {
+  flex-shrink: 0;
+}
+
+/* Stats Section */
+.statsSection {
+  padding: var(--space-2xl);
+}
+
+.sectionTitle {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+  margin: 0 0 var(--space-lg) 0;
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--space-lg);
+}
+
+.statItem {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+  padding: var(--space-lg);
+  background: var(--bg-secondary);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-light);
+  transition: all var(--transition-normal);
+}
+
+.statItem:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.statIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background: var(--color-primary);
+  color: white;
+  border-radius: var(--radius-lg);
+  flex-shrink: 0;
+}
+
+.statContent {
+  flex: 1;
+}
+
+.statValue {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+  line-height: 1;
+  margin-bottom: var(--space-xs);
+}
+
+.statLabel {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  font-weight: var(--font-weight-medium);
+}
+
+/* Edit Section */
+.editSection {
+  padding: var(--space-2xl);
+}
+
+.editForm {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.inputError {
+  border-color: var(--color-error);
+}
+
+.inputError:focus {
+  border-color: var(--color-error);
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+}
+
+.errorMessage {
+  display: block;
+  font-size: var(--font-size-xs);
+  color: var(--color-error);
+  margin-top: var(--space-xs);
+}
+
+.successMessage {
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid var(--color-success);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  color: var(--color-success);
+  font-size: var(--font-size-sm);
+  text-align: center;
+  margin-bottom: var(--space-lg);
+}
+
+.submitError {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid var(--color-error);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  color: var(--color-error);
+  font-size: var(--font-size-sm);
+  text-align: center;
+}
+
+.formActions {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: var(--space-lg);
+  border-top: 1px solid var(--border-light);
+}
+
+.spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid transparent;
+  border-top: 2px solid currentColor;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Actions Section */
+.actionsSection {
+  padding: var(--space-2xl);
+}
+
+.actionsList {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+.signOutButton {
+  color: var(--color-error);
+}
+
+.signOutButton:hover {
+  background: rgba(239, 68, 68, 0.1);
+  border-color: var(--color-error);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .profilePage {
+    padding: var(--space-lg) 0;
+  }
+  
+  .profileHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-lg);
+    padding: var(--space-lg);
+  }
+  
+  .avatarSection {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    gap: var(--space-lg);
+  }
+  
+  .headerActions {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .statsSection,
+  .editSection,
+  .actionsSection {
+    padding: var(--space-lg);
+  }
+  
+  .statsGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .actionsList {
+    flex-direction: column;
+  }
+  
+  .actionsList .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .profileContainer {
+    gap: var(--space-lg);
+  }
+  
+  .avatar {
+    width: 64px;
+    height: 64px;
+  }
+  
+  .userName {
+    font-size: var(--font-size-xl);
+  }
+  
+  .statItem {
+    padding: var(--space-md);
+    gap: var(--space-md);
+  }
+  
+  .statIcon {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .statValue {
+    font-size: var(--font-size-xl);
+  }
+  
+  .formActions {
+    justify-content: stretch;
+  }
+  
+  .formActions .btn {
+    width: 100%;
+  }
+}
+
+/* Focus Styles */
+.headerActions .btn:focus,
+.actionsList .btn:focus,
+.formActions .btn:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.signOutButton:focus {
+  outline-color: var(--color-error);
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+  .avatar {
+    border-width: 2px;
+  }
+  
+  .statItem {
+    border-width: 2px;
+  }
+  
+  .inputError {
+    border-width: 2px;
+  }
+  
+  .successMessage,
+  .submitError {
+    border-width: 2px;
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .statItem {
+    transition: none;
+  }
+  
+  .statItem:hover {
+    transform: none;
+  }
+  
+  .spinner {
+    animation: none;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .profilePage {
+    background: white;
+  }
+  
+  .headerActions,
+  .editSection,
+  .actionsSection {
+    display: none;
+  }
+  
+  .card {
+    box-shadow: none;
+    border: 1px solid #ccc;
+  }
+}

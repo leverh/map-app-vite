@@ -1,0 +1,327 @@
+.categorySelector {
+  position: relative;
+  display: inline-block;
+}
+
+.triggerButton {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  min-width: 160px;
+  justify-content: space-between;
+  transition: all var(--transition-fast);
+}
+
+.triggerButton[aria-expanded="true"] {
+  background-color: var(--bg-secondary);
+  border-color: var(--color-primary);
+}
+
+.triggerContent {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.triggerIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  font-size: var(--font-size-base);
+}
+
+.triggerText {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Dropdown */
+.dropdown {
+  position: absolute;
+  top: calc(100% + var(--space-xs));
+  left: 0;
+  width: 320px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-xl);
+  z-index: var(--z-dropdown);
+  animation: slideDown 0.2s ease-out;
+  overflow: hidden;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  border-bottom: 1px solid var(--border-color);
+  background: var(--bg-secondary);
+}
+
+.tab {
+  flex: 1;
+  padding: var(--space-md);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-secondary);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  position: relative;
+}
+
+.tab:hover {
+  color: var(--text-primary);
+  background: var(--bg-tertiary);
+}
+
+.tabActive {
+  color: var(--color-primary);
+  background: var(--bg-card);
+}
+
+.tabActive::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--color-primary);
+}
+
+/* Tab Content */
+.tabContent {
+  padding: var(--space-lg);
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.sectionTitle {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: var(--space-md);
+}
+
+/* Category Grid */
+.categoryGrid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.categoryItem {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-md);
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  text-align: left;
+  width: 100%;
+  position: relative;
+}
+
+.categoryItem:hover {
+  background: var(--bg-secondary);
+  border-color: var(--border-light);
+}
+
+.categoryItemActive {
+  background: rgba(37, 99, 235, 0.1);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.categoryIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  font-size: var(--font-size-lg);
+  flex-shrink: 0;
+}
+
+.categoryName {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-primary);
+  flex: 1;
+}
+
+.checkmark {
+  color: var(--color-success);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-sm);
+}
+
+/* Filter Options */
+.filterOptions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.filterItem {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-md);
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  text-align: left;
+  width: 100%;
+}
+
+.filterItem:hover {
+  background: var(--bg-secondary);
+  border-color: var(--border-light);
+}
+
+.filterItemActive {
+  background: rgba(37, 99, 235, 0.1);
+  border-color: var(--color-primary);
+}
+
+.filterGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-xs);
+}
+
+.filterIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  font-size: var(--font-size-base);
+  flex-shrink: 0;
+}
+
+.filterName {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-primary);
+  flex: 1;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .dropdown {
+    width: 280px;
+    right: 0;
+    left: auto;
+  }
+  
+  .triggerButton {
+    min-width: 140px;
+  }
+  
+  .triggerText {
+    max-width: 80px;
+  }
+}
+
+@media (max-width: 480px) {
+  .dropdown {
+    width: 260px;
+  }
+  
+  .triggerButton {
+    min-width: 120px;
+    padding: var(--space-xs) var(--space-sm);
+  }
+  
+  .tabContent {
+    padding: var(--space-md);
+    max-height: 300px;
+  }
+  
+  .tab {
+    padding: var(--space-sm);
+    font-size: var(--font-size-xs);
+  }
+}
+
+/* Scrollbar Styling */
+.tabContent::-webkit-scrollbar {
+  width: 6px;
+}
+
+.tabContent::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+  border-radius: 3px;
+}
+
+.tabContent::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 3px;
+}
+
+.tabContent::-webkit-scrollbar-thumb:hover {
+  background: var(--border-dark);
+}
+
+/* Focus Styles */
+.triggerButton:focus,
+.tab:focus,
+.categoryItem:focus,
+.filterItem:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+  .categoryItemActive,
+  .filterItemActive {
+    border-width: 2px;
+  }
+  
+  .tabActive::after {
+    height: 3px;
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .dropdown {
+    animation: none;
+  }
+  
+  .triggerButton,
+  .tab,
+  .categoryItem,
+  .filterItem {
+    transition: none;
+  }
+}
